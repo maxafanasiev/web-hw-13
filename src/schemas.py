@@ -58,3 +58,17 @@ class ContactResponse(BaseModel):
     email: EmailStr
     phone_number: str
     birthday: date
+
+
+# ------------------------------EMAIL SCHEMA------------------------------
+class RequestEmail(BaseModel):
+    email: EmailStr
+
+
+class UserResetPasswordRequest(BaseModel):
+    email: str
+
+
+class UserNewPassword(BaseModel):
+    new_password: str
+

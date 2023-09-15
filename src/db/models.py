@@ -1,5 +1,5 @@
 from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy import Column, Integer, String, TIMESTAMP, func, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, TIMESTAMP, func, DateTime, ForeignKey, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
 from src.db.db_connect import engine
@@ -31,3 +31,4 @@ class User(Base):
     created_at = Column('crated_at', DateTime, default=func.now())
     avatar = Column(String(255), nullable=True)
     refresh_token = Column(String(255), nullable=True)
+    confirmed = Column(Boolean, default=False)

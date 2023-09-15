@@ -1,18 +1,16 @@
-import configparser
-
 from fastapi import HTTPException, status
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-config = configparser.ConfigParser()
-config.read('src/config/config.ini')
+from src.conf.config import settings
 
-user = config.get('DB', 'user')
-password = config.get('DB', 'pass')
-db_name = config.get('DB', 'db_name')
-domain = config.get('DB', 'domain')
-port = config.get('DB', 'port')
+
+user = settings.postgres_user
+password = settings.postgres_password
+db_name = settings.postgres_name
+domain = settings.postgres_domain
+port = settings.postgres_port
 
 
 engine = create_engine(f"postgresql+psycopg2://{user}:{password}@{domain}:{port}/{db_name}")

@@ -26,4 +26,23 @@ async def create_user(body: UserModel, db: Session) -> User:
 async def update_token(user: User, token: str | None, db: Session) -> None:
     user.refresh_token = token
     db.commit()
-    
+
+
+async def confirmed_email(email: str, db: Session) -> None:
+    user = await get_user_by_email(email, db)
+    user.confirmed = True
+    db.commit()
+
+
+async def update_avatar(email: str, url: str, db: Session) -> User:
+    user = await get_user_by_email(email, db)
+    user.avatar = url
+    db.commit()
+    return user
+
+
+async def set_new_password(email: str, new_password: str, db: Session):
+    user = await get_user_by_email(email, db)
+    user.password = new_password
+    db.commit()
+    return user
